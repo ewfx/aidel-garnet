@@ -1,60 +1,76 @@
-# 🚀 Project Name
+# 🛡️ Entity Risk Analysis System  
 
-## 📌 Table of Contents
-- [Introduction](#introduction)
-- [Demo](#demo)
-- [Inspiration](#inspiration)
-- [What It Does](#what-it-does)
-- [How We Built It](#how-we-built-it)
-- [Challenges We Faced](#challenges-we-faced)
-- [How to Run](#how-to-run)
-- [Tech Stack](#tech-stack)
-- [Team](#team)
+A machine learning-powered system for assessing the risk of financial transactions based on Named Entity Recognition (NER), public sanctions lists, and open data sources.
 
 ---
 
-## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+## 🚀 Features  
+✅ **Extracts entities** from transaction details  
+✅ **Classifies entities** (Corporation, NGO, Shell Company, etc.)  
+✅ **Checks sanctions lists** (OFAC, SEC EDGAR, Wikipedia)  
+✅ **Calculates risk score** based on entity type and regulatory status  
+✅ **Displays results** in a React frontend  
 
-## 🎥 Demo
-🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
+---
 
-![Screenshot 1](link-to-image)
+## 🛠️ Tech Stack  
+- **Backend:** Flask (Python)  
+- **Frontend:** React.js  
+- **ML Model:** Hugging Face NER  
+- **Data Sources:** OFAC, SEC EDGAR, Wikipedia  
 
-## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+---
 
-## ⚙️ What It Does
-Explain the key features and functionalities of your project.
+## 📥 Installation & Setup  
 
-## 🛠️ How We Built It
-Briefly outline the technologies, frameworks, and tools used in development.
+### ️1.  Clone the Repository**
+```sh
+git clone https://github.com/YOUR_USERNAME/aidel-garnet.git
+cd aidel-garnet
 
-## 🚧 Challenges We Faced
-Describe the major technical or non-technical challenges your team encountered.
 
-## 🏃 How to Run
-1. Clone the repository  
-   ```sh
-   git clone https://github.com/your-repo.git
-   ```
-2. Install dependencies  
-   ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
-   ```
-3. Run the project  
-   ```sh
-   npm start  # or python app.py
-   ```
+##### 2. SETUP BACKEND
 
-## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
 
-## 👥 Team
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)
+cd backend
+python3 -m venv venv
+source venv/bin/activate  # (Mac/Linux)
+venv\Scripts\activate     # (Windows)
+pip3 install -r requirements.txt
+
+##### 3. START THE BACKEND
+
+python3 app.py
+
+
+### Backend runs at: http://127.0.0.1:5000/
+
+
+##### $. SETUP THE FRONTEND
+
+cd ../frontend
+npm install
+npm start
+
+
+#### Frontend runs at: http://localhost:3000/
+
+#### API USAGE
+
+curl -X POST http://127.0.0.1:5000/analyze_transaction \
+-H "Content-Type: application/json" \
+-d '{"transaction_id": "TXN1001", "details": "Oceanic Holdings Ltd transferred $2,000,000 to an NGO in the Cayman Islands."}'
+
+
+### EXAMPLE API RESPONSE
+
+{
+  "Transaction_ID": "TXN1001",
+  "Extracted_Entities": "Oceanic Holdings Ltd, Quantum Holdings Ltd",
+  "Entity_Type": "Shell Company, Offshore Entity",
+  "Risk_Score": 0.95,
+  "Supporting_Evidence": "OFAC, SEC EDGAR, Wikidata",
+  "Confidence_Score": 0.97,
+  "Reason": "Oceanic Holdings Ltd is flagged as a Shell Company. Quantum Holdings Ltd is flagged as an Offshore Entity."
+}
+
